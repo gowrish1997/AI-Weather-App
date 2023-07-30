@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { getClient } from "@/apollo-client";
 import fetchWeatherQuery from "@/graphql/queries/fetchWeatherQueries";
@@ -30,17 +28,18 @@ const WeatherPage = async ({ params: { city, lat, long } }: props) => {
       longitude: long,
     },
   });
+  console.log(data);
 
   const result: Root = data.myQuery;
-  const cleanedData = cleanData(result, city);
-  const res = await fetch(`${getBasePath()}/api/getWeatherSummary`, {
-    method: "POST",
-    body: JSON.stringify({
-      weatherData: cleanedData,
-    }),
-  });
-  const gptData = await res.json();
-  console.log(gptData.content);
+  // const cleanedData = cleanData(result, city);
+  // const res = await fetch(`${getBasePath()}/api/getWeatherSummary`, {
+  //   method: "POST",
+  //   body: JSON.stringify({
+  //     weatherData: cleanedData,
+  //   }),
+  // });
+  // const gptData = await res.json();
+  // console.log(gptData.content);
 
   return (
     <div className="flex flex-col min-h-screen md:flex-row ">
@@ -56,7 +55,7 @@ const WeatherPage = async ({ params: { city, lat, long } }: props) => {
             </p>
           </div>
           <div className="m-2 mb-10 ">
-            <CalloutCard message={gptData.content} />
+            {/* <CalloutCard message={gptData.content} /> */}
           </div>
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 m-2 ">
             <StatCard
