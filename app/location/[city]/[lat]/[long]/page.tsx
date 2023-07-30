@@ -7,8 +7,8 @@ import InformationPanel from "@/components/InformationPanel";
 import TempChart from "@/components/TempChart";
 import RainChart from "@/components/RainChart";
 import HumidityChart from "@/components/HumidityChart";
-import { cleanData } from "@/lib/cleandata";
-import getBasePath from "@/lib/getBasePath";
+
+import GptCard from "@/components/GptCard";
 
 type props = {
   params: {
@@ -28,18 +28,9 @@ const WeatherPage = async ({ params: { city, lat, long } }: props) => {
       longitude: long,
     },
   });
-  console.log(data);
 
   const result: Root = data.myQuery;
-  // const cleanedData = cleanData(result, city);
-  // const res = await fetch(`${getBasePath()}/api/getWeatherSummary`, {
-  //   method: "POST",
-  //   body: JSON.stringify({
-  //     weatherData: cleanedData,
-  //   }),
-  // });
-  // const gptData = await res.json();
-  // console.log(gptData.content);
+
 
   return (
     <div className="flex flex-col min-h-screen md:flex-row ">
@@ -55,7 +46,7 @@ const WeatherPage = async ({ params: { city, lat, long } }: props) => {
             </p>
           </div>
           <div className="m-2 mb-10 ">
-            {/* <CalloutCard message={gptData.content} /> */}
+            <GptCard result={result} city={city} />
           </div>
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 m-2 ">
             <StatCard
