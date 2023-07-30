@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { getClient } from "@/apollo-client";
 import fetchWeatherQuery from "@/graphql/queries/fetchWeatherQueries";
@@ -28,6 +30,7 @@ const WeatherPage = async ({ params: { city, lat, long } }: props) => {
       longitude: long,
     },
   });
+
   const result: Root = data.myQuery;
   const cleanedData = cleanData(result, city);
   const res = await fetch(`${getBasePath()}/api/getWeatherSummary`, {
